@@ -1,45 +1,70 @@
 <script lang="ts">
-    import svelteLogo from '../../assets/svelte.svg';
-    import Counter from '../../lib/Counter.svelte';
+    import {createExtensionSettings} from '@/entrypoints/popup/state';
+    import Formatter from '@/entrypoints/popup/Formatter.svelte';
+    import NewFormatter from '@/entrypoints/popup/NewFormatter.svelte';
+
+    let settings = createExtensionSettings();
 </script>
 
 <main>
-    <div>
-        <a href="https://wxt.dev" target="_blank" rel="noreferrer">
-            <img src="/wxt.svg" class="logo" alt="WXT Logo"/>
-        </a>
-        <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-            <img src={svelteLogo} class="logo svelte" alt="Svelte Logo"/>
-        </a>
+    <div class="header">
+        <span>ウェブページの情報を読み取る</span>
     </div>
-    <h1>WXT + Svelte</h1>
-
-    <div class="card">
-        <Counter/>
+    <div class="formatters">
+        {#each settings.formatters as formatter (formatter.name)}
+            <Formatter name={formatter.name} format={formatter.format} {settings}/>
+        {/each}
     </div>
-
-    <p class="read-the-docs">
-        Click on the WXT and Svelte logos to learn more
-    </p>
+    <hr/>
+    <div class="footer">
+        <NewFormatter {settings}/>
+    </div>
 </main>
 
 <style>
-    .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-        transition: filter 300ms;
+    :global(:root) {
+        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+
+        color-scheme: light dark;
+        color: rgba(255, 255, 255, 0.87);
+        background-color: #242424;
+
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
     }
 
-    .logo:hover {
-        filter: drop-shadow(0 0 2em #54bc4ae0);
+    :global(body) {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        margin: 0;
+        padding: 8px;
+        box-sizing: border-box;
     }
 
-    .logo.svelte:hover {
-        filter: drop-shadow(0 0 2em #ff3e00aa);
+    main {
+        min-width: 360px;
+        max-width: 360px;
+        min-height: 150px;
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
-    .read-the-docs {
-        color: #888;
+    .header {
+        padding-bottom: 4px;
+    }
+
+    .formatters {
+        padding: 0 10px;
+    }
+
+    .footer {
+        padding: 0 10px;
     }
 </style>
