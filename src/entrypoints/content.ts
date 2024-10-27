@@ -3,8 +3,6 @@ import {formatText, tryWriteTextUntilSuccessfully} from '@/entrypoints/content-h
 export default defineContentScript({
     matches: ['*://*/*'],
     main() {
-        console.log('Hello content.');
-
         browser.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             if (typeof request !== 'string') {
                 return;
