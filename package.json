@@ -11,6 +11,8 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "check": "svelte-check --tsconfig ./tsconfig.json",
+    "e2e": "npm run build && playwright test",
+    "e2e:without-build": "playwright test",
     "postinstall": "wxt prepare"
   },
   "devDependencies": {
