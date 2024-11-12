@@ -23,9 +23,9 @@
 </script>
 
 <div class="formatter">
-    <input type="text" class="name" bind:value={name}/>
+    <input type="text" class="name" placeholder="新規フォーマット名" bind:value={name}/>
     <button onclick={handleAddFormatter}>登録</button>
-    <input type="text" class="format" bind:value={format}/>
+    <input type="text" class="format" placeholder="新規フォーマット文字列" bind:value={format}/>
 </div>
 
 <style>
